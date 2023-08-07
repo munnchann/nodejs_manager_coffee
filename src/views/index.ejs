@@ -15,16 +15,14 @@
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
     </div>
-
     <div>
-
         <div class="w3-container">
             <h2>List Users:</h2>
             <table class="w3-table-all w3-hoverable">
                 <thead>
                     <tr class="w3-light-grey">
                         <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Phone Number</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,21 +30,40 @@
                     <% for(let i=0; i< dataUser.length; i++) {%>
                         <tr>
                             <td>
-                                <a href="/detail/<%= dataUser[i].Id %>">
+                                <a href="/detail/user/<%= dataUser[i].Id %>">
                                     <%= dataUser[i].firstName %>
                                 </a>
                             </td>
                             <td>
-                                <%= dataUser[i].lastName %>
+                                <%= dataUser[i].phoneNumber %>
                             </td>
                             <td>
-                                <button type="button">Edit</button>
-                                <button type="button">Delete</button>
+                                <form action="/edit-user/<%= dataUser[i].Id %>" method="GET">
+                                    <button type="submit">Edit</button>
+                                </form>
+                                <form action="/delete-user" method="POST">
+                                    <input type="hidden" value="<%= dataUser[i].Id %>" name="userId">
+                                    <button type="submit">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         <% } %>
                 </tbody>
             </table>
+        </div>
+        <div class="container">
+            <!-- <h1> <b>Create New User:</b></h1> -->
+            <div class="newEmp">
+                <form action="/create-new-user" method="POST">
+                    <label for="fname">Full Name</label>
+                    <input type="text" id="fname" name="firstName" placeholder="Your name..">
+
+                    <label for="lname">Phone Number</label>
+                    <input type="text" id="lname" name="phoneNumber" placeholder="Your phone number..">
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
         </div>
     </div>
 </body>
